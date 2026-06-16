@@ -38,11 +38,22 @@ public class EmployeeController {
 		return employeeService.getAllEmployees();
 	}
 
+	// controller methods return raw business data -
 //	@GetMapping("/{id}")
 //	public Employee getEmployeeById(@PathVariable String id) {
 //		return employeeService.getEmployeeById(id);
 //	}
 
+	// ResponseEntity object with business data and status -
+//	@GetMapping("/{id}")
+//	public ResponseEntity<Employee> getEmployeeById(@PathVariable String id) {
+//		Employee emp = employeeService.getEmployeeById(id);
+//		HttpStatus status = HttpStatus.OK;
+//		ResponseEntity<Employee> response = new ResponseEntity<Employee>(emp, status);
+//		return response;
+//	}
+
+	// ResponseEntity object with business data, headers and status -
 	@GetMapping("/{id}")
 	public ResponseEntity<Employee> getEmployeeById(@PathVariable String id) {
 		Employee emp = employeeService.getEmployeeById(id);
@@ -65,12 +76,12 @@ public class EmployeeController {
 
 	@PostMapping
 	@ResponseStatus(HttpStatus.CREATED)
-	public Employee createEmployee(@Valid @RequestBody Employee employee) {
+	public Employee createEmployee(@RequestBody Employee employee) {
 		return employeeService.createEmployee(employee);
 	}
 
 	@PutMapping("/{id}")
-	public Employee updateEmployee(@PathVariable String id, @Valid @RequestBody Employee employee) {
+	public Employee updateEmployee(@PathVariable String id, @RequestBody Employee employee) {
 		return employeeService.updateEmployee(id, employee);
 	}
 

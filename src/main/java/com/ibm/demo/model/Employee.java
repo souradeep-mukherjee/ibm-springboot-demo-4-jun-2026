@@ -12,6 +12,19 @@
 
 
 
+
+//EmployeeRequestDTO - client sends - firstName, lastName, email, salary 
+//EmployeeResponseDTO - server returns - id, firstName, lastName, email, salary
+//Employee model - id, firstName, lastName, email, salary
+//@Document, @Id, @Field, @Indexed
+//EmployeeMapper class
+//RequestDTO to Employee to save 
+//Employee to ResponseDTO to return 
+//EmployeeService interface + impl
+//EmployeeController
+
+
+
 package com.ibm.demo.model;
 
 import jakarta.validation.constraints.Email;

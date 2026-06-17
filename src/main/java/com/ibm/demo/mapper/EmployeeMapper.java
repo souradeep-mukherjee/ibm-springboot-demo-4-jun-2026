@@ -15,6 +15,8 @@ public class EmployeeMapper {
 		employee.setLastName(dto.getLastName());
 		employee.setEmail(dto.getEmail().toLowerCase());
 		employee.setSalary(dto.getSalary());
+		employee.setDepartmentId(dto.getDepartmentId());
+		employee.setProjectIds(dto.getProjectIds());
 		return employee;
 	}
 
@@ -23,10 +25,13 @@ public class EmployeeMapper {
 		existing.setLastName(dto.getLastName());
 		existing.setEmail(dto.getEmail().toLowerCase());
 		existing.setSalary(dto.getSalary());
+		existing.setDepartmentId(dto.getDepartmentId());
+		existing.setProjectIds(dto.getProjectIds());
 	}
 
 	public static EmployeeResponse toResponseDTO(Employee employee) {
 		return new EmployeeResponse(employee.getId(), employee.getFirstName(), employee.getLastName(),
-				employee.getEmail(), employee.getSalary(), employee.getCreatedAt(), employee.getUpdatedAt());
+				employee.getEmail(), employee.getSalary(), employee.getDepartmentId(), employee.getProjectIds(),
+				employee.getCreatedAt(), employee.getUpdatedAt());
 	}
 }

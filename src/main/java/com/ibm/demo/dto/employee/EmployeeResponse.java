@@ -1,6 +1,8 @@
 package com.ibm.demo.dto.employee;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Outgoing data sent to the client. No validation annotations — this is
@@ -14,6 +16,8 @@ public class EmployeeResponse {
 	private String lastName;
 	private String email;
 	private Double salary;
+	private String departmentId;
+	private List<String> projectIds = new ArrayList<>();
 	private LocalDateTime createdAt;
 	private LocalDateTime updatedAt;
 
@@ -27,6 +31,19 @@ public class EmployeeResponse {
 		this.lastName = lastName;
 		this.email = email;
 		this.salary = salary;
+		this.createdAt = createdAt;
+		this.updatedAt = updatedAt;
+	}
+
+	public EmployeeResponse(String id, String firstName, String lastName, String email, Double salary,
+			String departmentId, List<String> projectIds, LocalDateTime createdAt, LocalDateTime updatedAt) {
+		this.id = id;
+		this.firstName = firstName;
+		this.lastName = lastName;
+		this.email = email;
+		this.salary = salary;
+		this.departmentId = departmentId;
+		this.projectIds = projectIds != null ? projectIds : new ArrayList<>();
 		this.createdAt = createdAt;
 		this.updatedAt = updatedAt;
 	}
@@ -71,10 +88,20 @@ public class EmployeeResponse {
 		this.salary = salary;
 	}
 
-	@Override
-	public String toString() {
-		return "EmployeeResponse [id=" + id + ", firstName=" + firstName + ", lastName=" + lastName + ", email=" + email
-				+ ", salary=" + salary + "]";
+	public String getDepartmentId() {
+		return departmentId;
+	}
+
+	public void setDepartmentId(String departmentId) {
+		this.departmentId = departmentId;
+	}
+
+	public List<String> getProjectIds() {
+		return projectIds;
+	}
+
+	public void setProjectIds(List<String> projectIds) {
+		this.projectIds = projectIds;
 	}
 
 	public LocalDateTime getCreatedAt() {
@@ -91,5 +118,12 @@ public class EmployeeResponse {
 
 	public void setUpdatedAt(LocalDateTime updatedAt) {
 		this.updatedAt = updatedAt;
+	}
+
+	@Override
+	public String toString() {
+		return "EmployeeResponse [id=" + id + ", firstName=" + firstName + ", lastName=" + lastName + ", email=" + email
+				+ ", salary=" + salary + ", departmentId=" + departmentId + ", projectIds=" + projectIds
+				+ ", createdAt=" + createdAt + ", updatedAt=" + updatedAt + "]";
 	}
 }

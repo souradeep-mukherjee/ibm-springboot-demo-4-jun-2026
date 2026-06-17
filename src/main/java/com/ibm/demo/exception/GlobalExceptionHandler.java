@@ -17,12 +17,37 @@ import org.springframework.web.bind.annotation.RestControllerAdvice;
 public class GlobalExceptionHandler {
 
 	@ExceptionHandler(EmployeeNotFoundException.class)
-	public ResponseEntity<Map<String, Object>> handleNotFound(EmployeeNotFoundException ex) {
+	public ResponseEntity<Map<String, Object>> handleEmployeeNotFound(EmployeeNotFoundException ex) {
+		return buildResponse(HttpStatus.NOT_FOUND, ex.getMessage());
+	}
+
+	@ExceptionHandler(DepartmentNotFoundException.class)
+	public ResponseEntity<Map<String, Object>> handleDepartmentNotFound(DepartmentNotFoundException ex) {
+		return buildResponse(HttpStatus.NOT_FOUND, ex.getMessage());
+	}
+
+	@ExceptionHandler(ProjectNotFoundException.class)
+	public ResponseEntity<Map<String, Object>> handleProjectNotFound(ProjectNotFoundException ex) {
 		return buildResponse(HttpStatus.NOT_FOUND, ex.getMessage());
 	}
 
 	@ExceptionHandler(EmailAlreadyExistsException.class)
-	public ResponseEntity<Map<String, Object>> handleConflict(EmailAlreadyExistsException ex) {
+	public ResponseEntity<Map<String, Object>> handleEmailConflict(EmailAlreadyExistsException ex) {
+		return buildResponse(HttpStatus.CONFLICT, ex.getMessage());
+	}
+
+	@ExceptionHandler(DepartmentNameAlreadyExistsException.class)
+	public ResponseEntity<Map<String, Object>> handleDepartmentNameConflict(DepartmentNameAlreadyExistsException ex) {
+		return buildResponse(HttpStatus.CONFLICT, ex.getMessage());
+	}
+
+	@ExceptionHandler(ProjectNameAlreadyExistsException.class)
+	public ResponseEntity<Map<String, Object>> handleProjectNameConflict(ProjectNameAlreadyExistsException ex) {
+		return buildResponse(HttpStatus.CONFLICT, ex.getMessage());
+	}
+
+	@ExceptionHandler(ReferentialIntegrityException.class)
+	public ResponseEntity<Map<String, Object>> handleReferentialIntegrity(ReferentialIntegrityException ex) {
 		return buildResponse(HttpStatus.CONFLICT, ex.getMessage());
 	}
 

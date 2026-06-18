@@ -88,6 +88,45 @@ public class EmployeeController {
 		employeeService.deleteEmployee(id);
 		return ResponseEntity.noContent().build();
 	}
+
+	@PutMapping("/{id}/department/{departmentId}")
+	public ResponseEntity<EmployeeResponse> assignEmployeeToDepartment(@PathVariable String id,
+			@PathVariable String departmentId) {
+		EmployeeResponse employee = employeeService.getEmployeeById(id);
+		EmployeeRequest updateRequest = new EmployeeRequest(employee.getFirstName(), employee.getLastName(),
+				employee.getEmail(), employee.getSalary(), departmentId, employee.getProjectIds());
+		return ResponseEntity.ok(employeeService.updateEmployee(id, updateRequest));
+	}
+
+	@DeleteMapping("/{id}/department")
+	public ResponseEntity<EmployeeResponse> removeEmployeeFromDepartment(@PathVariable String id) {
+		EmployeeResponse employee = employeeService.getEmployeeById(id);
+		EmployeeRequest updateRequest = new EmployeeRequest(employee.getFirstName(), employee.getLastName(),
+				employee.getEmail(), employee.getSalary(), null, employee.getProjectIds());
+		return ResponseEntity.ok(employeeService.updateEmployee(id, updateRequest));
+	}
+
+	@PostMapping("/{id}/projects/{projectId}")
+	public ResponseEntity<EmployeeResponse> addEmployeeToProject(@PathVariable String id,
+			@PathVariable String projectId) {
+		EmployeeResponse employee = employeeService.getEmployeeById(id);
+		if (!employee.getProjectIds().contains(projectId)) {
+			employee.getProjectIds().add(projectId);
+		}
+		EmployeeRequest updateRequest = new EmployeeRequest(employee.getFirstName(), employee.getLastName(),
+				employee.getEmail(), employee.getSalary(), employee.getDepartmentId(), employee.getProjectIds());
+		return ResponseEntity.ok(employeeService.updateEmployee(id, updateRequest));
+	}
+
+	@DeleteMapping("/{id}/projects/{projectId}")
+	public ResponseEntity<EmployeeResponse> removeEmployeeFromProject(@PathVariable String id,
+			@PathVariable String projectId) {
+		EmployeeResponse employee = employeeService.getEmployeeById(id);
+		employee.getProjectIds().remove(projectId);
+		EmployeeRequest updateRequest = new EmployeeRequest(employee.getFirstName(), employee.getLastName(),
+				employee.getEmail(), employee.getSalary(), employee.getDepartmentId(), employee.getProjectIds());
+		return ResponseEntity.ok(employeeService.updateEmployee(id, updateRequest));
+	}
 }
 
 //package com.ibm.demo.controller;

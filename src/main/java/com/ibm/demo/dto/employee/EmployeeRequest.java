@@ -1,5 +1,8 @@
 package com.ibm.demo.dto.employee;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
@@ -29,6 +32,10 @@ public class EmployeeRequest {
 	@Positive(message = "Salary must be a positive value")
 	private Double salary;
 
+	private String departmentId;
+
+	private List<String> projectIds = new ArrayList<>();
+
 	public EmployeeRequest() {
 	}
 
@@ -37,6 +44,16 @@ public class EmployeeRequest {
 		this.lastName = lastName;
 		this.email = email;
 		this.salary = salary;
+	}
+
+	public EmployeeRequest(String firstName, String lastName, String email, Double salary, String departmentId,
+			List<String> projectIds) {
+		this.firstName = firstName;
+		this.lastName = lastName;
+		this.email = email;
+		this.salary = salary;
+		this.departmentId = departmentId;
+		this.projectIds = projectIds != null ? projectIds : new ArrayList<>();
 	}
 
 	public String getFirstName() {
@@ -71,9 +88,25 @@ public class EmployeeRequest {
 		this.salary = salary;
 	}
 
+	public String getDepartmentId() {
+		return departmentId;
+	}
+
+	public void setDepartmentId(String departmentId) {
+		this.departmentId = departmentId;
+	}
+
+	public List<String> getProjectIds() {
+		return projectIds;
+	}
+
+	public void setProjectIds(List<String> projectIds) {
+		this.projectIds = projectIds;
+	}
+
 	@Override
 	public String toString() {
 		return "EmployeeRequest [firstName=" + firstName + ", lastName=" + lastName + ", email=" + email + ", salary="
-				+ salary + "]";
+				+ salary + ", departmentId=" + departmentId + ", projectIds=" + projectIds + "]";
 	}
 }
